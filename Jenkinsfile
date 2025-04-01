@@ -3,8 +3,18 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                echo 'Rust environment is pre-installed in Docker container.'
-                sh 'rustup show'  
+                echo 'Setting up Rust environment...'
+                sh '''
+                if ! command -v rustup &> /dev/null
+                then
+                    echo "rustup not found, installing..."
+                    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+                    export PATH="$HOME/.cargo/bin:$PATH"
+                else
+                    echo "rustup is already installed"
+                fi
+                rustup show
+                '''
             }
         }
 
