@@ -13,6 +13,13 @@ pipeline {
                 else
                     echo "rustup is already installed"
                 fi
+                # Verify that cargo is available
+                if ! command -v cargo &> /dev/null
+                then
+                    echo "cargo could not be found, something went wrong with the installation"
+                    exit 1
+                fi
+                cargo --version
                 rustup show
                 '''
             }
