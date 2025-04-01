@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'my-rust-ci:latest'  // ใช้ Docker image ที่เราสร้างจาก Dockerfile
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // ใช้ Docker daemon
-        }
-    }
+    agent any
 
     stages {
         stage('Setup') {
