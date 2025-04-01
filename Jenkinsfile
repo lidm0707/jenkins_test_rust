@@ -2,10 +2,12 @@ pipeline {
     agent any
     stages {
         stage('Setup') {
+        stage('Setup') {
             steps {
-                echo 'Setting up Rust environment...'
-                sh 'rustup show'  // ตรวจสอบ Rust environment
+                echo 'Rust environment is pre-installed in Docker container.'
+                sh 'rustup show'  
             }
+        }
         }
         stage('Run Unit Tests') {
             steps {
