@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'sudo cargo --version' // ใช้ sudo เรียก cargo
+                sh ' cargo --version' // ใช้  เรียก cargo
             }
         }
 
         stage('Run Unit Tests') {
             steps {
                 echo 'Running unit tests...'
-                sh 'sudo cargo test'
+                sh ' cargo test'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 sh '''
-                sudo docker build -t test-ci-rust:latest .
+                 docker build -t test-ci-rust:latest .
                 '''
             }
         }
