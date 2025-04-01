@@ -13,8 +13,8 @@ pipeline {
                     echo "rustup is already installed"
                 fi
                 
-                # Source cargo environment
-                source $HOME/.cargo/env
+                # Source cargo environment for POSIX shells using dot (.)
+                . $HOME/.cargo/env  # Using dot (.) instead of source
                 
                 # Verify that cargo is available
                 if ! command -v cargo &> /dev/null
