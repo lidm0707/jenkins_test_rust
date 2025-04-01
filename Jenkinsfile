@@ -1,5 +1,11 @@
 pipeline {
     agent any
+
+    environment {
+        RUSTUP_HOME = "$HOME/.rustup"
+        CARGO_HOME = "$HOME/.cargo"
+    }
+
     stages {
         stage('Setup') {
             steps {
