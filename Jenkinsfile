@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'rust:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Allow access to Docker daemon
-        }
-    }
+    agent any
 
     stages {
         stage('Setup') {
