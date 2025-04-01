@@ -9,10 +9,13 @@ pipeline {
                 then
                     echo "rustup not found, installing..."
                     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-                    export PATH="$HOME/.cargo/bin:$PATH"
                 else
                     echo "rustup is already installed"
                 fi
+                
+                # Source cargo environment
+                source $HOME/.cargo/env
+                
                 # Verify that cargo is available
                 if ! command -v cargo &> /dev/null
                 then
