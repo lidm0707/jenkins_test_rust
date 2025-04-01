@@ -1,10 +1,11 @@
 pipeline {
-    agent any
+    agent   {
+                 docker {
+                image 'rust:latest' 
+            }
 
-    environment {
-        RUSTUP_HOME = "$HOME/.rustup"
-        CARGO_HOME = "$HOME/.cargo"
     }
+
 
     stages {
         stage('Setup') {
