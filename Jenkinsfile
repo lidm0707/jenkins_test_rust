@@ -2,13 +2,12 @@ pipeline {
     agent any
     stages {
         stage('Setup') {
-        stage('Setup') {
             steps {
                 echo 'Rust environment is pre-installed in Docker container.'
                 sh 'rustup show'  
             }
         }
-        }
+
         stage('Run Unit Tests') {
             steps {
                 echo 'Running unit tests...'
