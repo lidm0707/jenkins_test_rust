@@ -4,6 +4,7 @@ pipeline {
         stage('Setup') {
             steps {
                 sh 'cargo --version'
+            }
         }
 
         stage('Run Unit Tests') {
@@ -36,5 +37,4 @@ pipeline {
             echo 'Build or tests failed. Deployment skipped.'
         }
     }
-}
 }
