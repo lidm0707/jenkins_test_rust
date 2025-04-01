@@ -1,24 +1,22 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'my-rust-ci:latest'  // ใช้ Docker image ที่เราสร้างจาก Dockerfile
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // ใช้ Docker daemon
+        }
+    }
 
     stages {
         stage('Setup') {
             steps {
-                sh 'cargo --version'
+                sh 'sudo cargo --version' // ใช้ sudo เรียก cargo
             }
         }
 
         stage('Run Unit Tests') {
             steps {
                 echo 'Running unit tests...'
-                sh 'cargo test'
-            }
-        }
-
-        stage('Install Docker CLI') {
-            steps {
-                echo 'Installing Docker CLI...'
-                sh 'apt-get update && apt-get install -y docker.io'
+                sh 'sudo cargo test'
             }
         }
 
@@ -29,7 +27,7 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 sh '''
-                docker build -t test-ci-rust:latest .
+                sudo docker build -t test-ci-rust:latest .
                 '''
             }
         }
