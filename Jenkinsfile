@@ -1,11 +1,10 @@
 pipeline {
-    agent   {
-                 docker {
-                image 'rust:latest' 
-            }
-
+    agent {
+        docker {
+            image 'rust:latest' 
+            args '-v /var/run/docker.sock:/var/run/docker.sock' /
+        }
     }
-
 
     stages {
         stage('Setup') {
@@ -21,6 +20,13 @@ pipeline {
             }
         }
 
+        stage('Install Docker CLI') {
+            steps {
+                echo 'Installing Docker CLI...'
+                sh 'apt-get update && apt-get install -y docker.io'
+            }
+        }
+
         stage('Build Docker Image') {
             when {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
@@ -33,6 +39,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             echo 'Cleaning up...'
